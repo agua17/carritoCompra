@@ -45,9 +45,9 @@ function carritoHTML(){
         <td>
         <img src="${curso.imagen}" width="100"
         </td>
-        <td>
-        ${curso.titulo}
-        </td>
+        <td>${curso.titulo}</td>
+         <td>${curso.precio}</td>
+          <td>${curso.cantidad}</td>
         `;
 
         contenedorCarrito.appendChild(row);
