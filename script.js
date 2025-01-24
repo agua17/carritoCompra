@@ -54,5 +54,8 @@ function carritoHTML(){
 }
 
 function limpiarHTML(){
-    contenedorCarrito.innerHTML = '';
+    while(contenedorCarrito.firstChild){
+        contenedorCarrito.removeChild(contenedorCarrito.firstChild)
+
+    }
 }
