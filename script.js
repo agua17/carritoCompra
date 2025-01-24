@@ -15,16 +15,17 @@ function agregarCurso(e){
     e.preventDefault();
 
     if(e.target.classList.contains('agregar-carrito')){
-        const cursoSeleccionado = e.target.parentElement.parentElement;
-        leerDatosCurso(cursoSeleccionado);
+       const cursoId = e.target.getAttribute('data-id');
+       articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
+       carritoHTML();
     }
 }
 
 function eliminarCurso(e){
-    console.log(e.target.classList);
+   
     if(e.target.classList.contains('borrar-curso')){
     const cursoId = e.target.getAttribute('data-id');
-    articulosCarrito = articulosCarrito.filter(curso => curso.id === cursoId)
+    articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId)
 
 }
 }
