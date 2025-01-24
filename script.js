@@ -25,11 +25,28 @@ function leerDatosCurso(curso){
         imagen: curso.querySelector('img').src,
         titulo: curso.querySelector('h4').textContent,
         precio: curso.querySelector('.precio span').textContent,
-        id:curso.querySelector('a').getAttribute('data-id'),
+        id: curso.querySelector('a').getAttribute('data-id'),
         cantidad: 1
     }
 
-articulosCarrito = [...articulosCarrito,infoCurso];
+    const existe = articulosCarrito.some( curso => curso.id === infoCurso.id);
+
+    if(existe) {
+        const cursos = articulosCarrito.map(curso => {
+            if (curso.id === infoCurso.id){
+                curso.cantidad++;
+                return curso;
+                
+            }else{
+                return curso;
+            }
+        });
+        articulosCarrito = [...cursos];
+    }else{
+        articulosCarrito = [...articulosCarrito,infoCurso];
+    }
+
+
 console.log(articulosCarrito);
 
 carritoHTML();
