@@ -7,17 +7,22 @@ let articulosCarrito = [];
 cargarEventListeners();
 
 function cargarEventListeners(){
+
 listaCursos.addEventListener('click', agregarCurso);
-carrito.addEventListener('click', eliminarCurso)
+carrito.addEventListener('click', eliminarCurso);
+
+vaciarCarritoBtn.addEventListener('click', () => {
+    articulosCarrito = [];
+    limpiarHTML();
+})
 }
 
 function agregarCurso(e){
     e.preventDefault();
 
     if(e.target.classList.contains('agregar-carrito')){
-       const cursoId = e.target.getAttribute('data-id');
-       articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
-       carritoHTML();
+     const cursoSeleccionado = e.target.parentElement.parentElement; 
+     leerDatosCurso(cursoSeleccionado);
     }
 }
 
@@ -40,32 +45,31 @@ function leerDatosCurso(curso){
         cantidad: 1
     }
 
-    const existe = articulosCarrito.some( curso => curso.id === infoCurso.id);
-
+    const existe = articulosCarrito.some( curso => curso.id === infoCurso.id );
+    
     if(existe) {
-        const cursos = articulosCarrito.map(curso => {
-            if (curso.id === infoCurso.id){
+        const cursos = articulosCarrito.map ( curso => {
+            if ( curso.id === infoCurso.id ) {
                 curso.cantidad++;
                 return curso;
-                
-            }else{
+            } else {
                 return curso;
             }
-        });
+            })
+        
         articulosCarrito = [...cursos];
-    }else{
-        articulosCarrito = [...articulosCarrito,infoCurso];
+    } else {
+        articulosCarrito = [...articulosCarrito, infoCurso];
     }
 
-
-console.log(articulosCarrito);
-
-carritoHTML();
+    carritoHTML ();
+   
+   
 }
 
 function carritoHTML(){
 
-
+limpiarHTML();
 
     articulosCarrito.forEach((curso => {
         const {imagen, titulo,precio,cantidad, id} = curso;
